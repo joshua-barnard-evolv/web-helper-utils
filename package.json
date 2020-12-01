@@ -1,0 +1,11 @@
+{
+  "name": "@evolv-ai/web-helper-utils",
+  "version": "0.0.1",
+  "description": "Functions to help make writing Evolv experiments easier",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Teo Lisitza",
+  "license": "Apache-2.0"
+}
