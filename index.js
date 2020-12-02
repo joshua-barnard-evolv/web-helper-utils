@@ -40,10 +40,15 @@ function emitSelectorTimeout(messageObj) {
     window.evolv.client.emit('selector-timeout');
 }
 
-function waitForExist(selectors, callback, timeout, resolve, reject) {
+function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, resolveCb, rejectCb) {
     // EXAMPLE USAGE
     //
-    // waitForExist(['foo'], render, 6000, resolve, emitSelectorTimeout);
+    // waitForExist(['#header11'],
+    //              function() { console.log('render'); },
+    //              6000,
+    //              false,
+    //              function() { console.log('resolve'); },
+    //              emitSelectorTimeout);
     //
 
     var existInterval = setInterval(function() {
@@ -53,20 +58,24 @@ function waitForExist(selectors, callback, timeout, resolve, reject) {
           callback();
           clearInterval(existInterval);
           existInterval = null;
-          resolve();
-       }    
-    }, 50);
+          resolveCb();
+       }
+    }, 100);
  
     function checkExist() {
         setTimeout(function() {
             if (existInterval) {
-               clearInterval(existInterval);
+               if (clearIntervalOnTimeout) {
+                   clearInterval(existInterval);
+               }
                console.info(selectors);
-               reject({ message : "Selectors not found: " + selectors.toString() });
+               rejectCb({ message : "Selectors not found: " + selectors.toString() });
             }    
          }, timeout);
     };
 
+    // wait until document is complete before starting timer to check
+    // for selector existence.
     docComplete(checkExist);
  };
 
