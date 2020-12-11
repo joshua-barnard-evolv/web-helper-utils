@@ -1,8 +1,5 @@
 /* Example code for Evolv project dependencies */
 
-var company = "None";
-var teamCookieValue = getCookie('team');
-
 function setCookie(name,value,days) {
     var expires = "";
     if (days) {
@@ -23,6 +20,9 @@ function getCookie(name) {
     }
     return null;
 }
+
+var company = "None";
+var teamCookieValue = getCookie('team');
 
 if (teamCookieValue === "TeamWest") {
     company = "Western Corp";
