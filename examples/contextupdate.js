@@ -1,7 +1,5 @@
 /* Example code for Evolv project dependencies */
 
-
-
 function setCookie(name,value,days) {
     var expires = "";
     if (days) {
