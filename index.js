@@ -9,7 +9,7 @@
  * Created at     : 2020-12-01
  */
 
- function docReady(fn) {
+function docReady(fn) {
     // see if DOM is already available
     if (document.readyState === "complete" || document.readyState === "interactive") {
         // call on next available tick
@@ -55,8 +55,18 @@ function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, reso
        if (selectors.every(function(ss) {
           return document.querySelector(ss);
           })) {
-          callback();
+
+          // Always clear interval once all selectors are found
           clearInterval(existInterval);
+
+          try {
+            callback();
+          } catch (err) {
+            window.evolv.client.contaminate({details:err.message, reason:'error-thrown'});
+            throw err;
+          }
+
+          // Only set interval to null and resolve if callback() runs without error
           existInterval = null;
           resolveCb();
        }
@@ -69,7 +79,7 @@ function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, reso
                    clearInterval(existInterval);
                }
                console.info(selectors);
-               rejectCb({ message : "Selectors not found: " + selectors.toString() });
+               rejectCb({ message : "Selectors not found or other error thrown: " + selectors.toString() });
             }    
          }, timeout);
     };

@@ -1,7 +1,6 @@
 /* Example code for Evolv project dependencies */
 
-var company = "None";
-var teamCookieValue = getCookie('team');
+
 
 function setCookie(name,value,days) {
     var expires = "";
@@ -24,15 +23,18 @@ function getCookie(name) {
     return null;
 }
 
+var company = "None";
+var teamCookieValue = getCookie('team');
+
 if (teamCookieValue === "TeamWest") {
     company = "Western Corp";
 } else if (document.querySelector("meta[name='IBM']")) {
     company = "IBM";
 };
 
-var loggedIn = false;
 const clientCookie = 'companyLoggedIn'
 const evolvKeyName = 'evolv:loggedin';
+var loggedIn = false;
 var loggedInThisSession = false;
 var loggedInLast30Days = false;
 
