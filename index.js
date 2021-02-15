@@ -41,15 +41,16 @@ function emitSelectorTimeout(messageObj) {
 }
 
 function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, resolveCb, rejectCb) {
-    // EXAMPLE USAGE
+    // EXAMPLE USAGE from within an Evolv variant:
     //
     // waitForExist(['#header11'],
     //              function() { console.log('render'); },
     //              6000,
     //              false,
     //              resolve,
-    //              reject;
+    //              reject);
     //
+    // return true;
 
     var existInterval = setInterval(function() {
        if (selectors.every(function(ss) {
