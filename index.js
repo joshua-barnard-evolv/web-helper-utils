@@ -47,8 +47,8 @@ function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, reso
     //              function() { console.log('render'); },
     //              6000,
     //              false,
-    //              function() { console.log('resolve'); },
-    //              emitSelectorTimeout);
+    //              resolve,
+    //              reject;
     //
 
     var existInterval = setInterval(function() {
