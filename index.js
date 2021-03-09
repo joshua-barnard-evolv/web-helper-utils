@@ -53,7 +53,9 @@ function waitForExist(selectors, callback, timeout, clearIntervalOnTimeout, reso
     // return true;
 
     var existInterval = setInterval(function () {
+        console.log(selectors);
         if (selectors.every(function (ss) {
+            console.log('Selector removed: ' + ss);
             selectors.splice(selectors.indexOf(ss), 1);
             return document.querySelector(ss);
         })) {
